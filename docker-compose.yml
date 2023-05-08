@@ -1,0 +1,18 @@
+version: "3.2"
+
+services:
+  pg_store:
+    image: postgres:12.4
+    container_name: pg_store
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: adminroot
+      POSTGRES_PASSWORD: storepassword
+      POSTGRES_DB: pg_store
+      TZ: "UTC"
+      PGTZ: "UTC"
+    ports:
+      - 5432:5432
+    networks:
+      - default
+    
