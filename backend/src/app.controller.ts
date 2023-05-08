@@ -7,6 +7,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    const res: object | any = { status: 200, msg: 'Hello World!' };
+    return res;
   }
 }

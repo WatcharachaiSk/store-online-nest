@@ -1,9 +1,9 @@
 version: "3.2"
 
 services:
-  pg_store:
+  pgstore:
     image: postgres:12.4
-    container_name: pg_store
+    container_name: pgstore
     restart: unless-stopped
     environment:
       POSTGRES_USER: adminroot
