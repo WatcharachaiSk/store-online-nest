@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
-import { UserInfo } from './userInfo.entity';
-import { RoleUser } from './role.entity';
+import { RoleUserEntity } from './role.entity';
+import * as bcrypt from 'bcrypt';
 
-@Entity('user')
-export class User {
+@Entity({ name: 'user' })
+export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -13,11 +13,20 @@ export class User {
   @Column()
   password: string;
 
-  @OneToOne(() => UserInfo, (userInfo) => userInfo.user)
-  @JoinColumn({ name: 'info_id', referencedColumnName: 'id' })
-  userInfo: UserInfo;
+  @Column({ nullable: true })
+  firstName: string;
 
-  @ManyToOne(() => RoleUser, (roleUser) => roleUser.user)
+  @Column({ nullable: true })
+  lastName: string;
+
+  @Column({ nullable: true })
+  email: string;
+
+  @ManyToOne(() => RoleUserEntity, (roleUser) => roleUser.id)
   @JoinColumn({ name: 'role_id', referencedColumnName: 'id' })
-  roleUser: RoleUser;
+  roleUser: RoleUserEntity;
+
+  async hashPassword(password: string, saltOrRounds: number) {
+    return await bcrypt.hash(password, saltOrRounds);
+  }
 }

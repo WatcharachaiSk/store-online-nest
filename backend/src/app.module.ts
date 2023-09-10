@@ -6,12 +6,15 @@ import { config } from 'dotenv';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { RoleModule } from './users/role/role.module';
+
 
 config(); // loads environment variables from .env file
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
 
 @Module({
   imports: [
+    RoleModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: DB_HOST,
@@ -24,8 +27,9 @@ const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
     }),
     AuthModule,
     UsersModule,
+    
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

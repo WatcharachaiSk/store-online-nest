@@ -5,17 +5,20 @@ import {
   OneToOne,
   OneToMany,
 } from 'typeorm';
-import { User } from './user.entity';
 
-@Entity('role_user')
-export class RoleUser {
+@Entity({ name: 'role_user' })
+export class RoleUserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'is_role' })
-  isRole: string;
+  @Column({ name: 'name' })
+  name: string;
 
-  @OneToMany(() => User, (user) => user.roleUser)
-  // @JoinColumn({ name: 'p_id', referencedColumnName: 'p_id' })
-  user: User[];
+  @Column({ name: 'name_th' })
+  nameTH: string;
+
+  @Column({ name: 'role_of_magnitude' })
+  roleOfMagnitude: number;
+  
+
 }
