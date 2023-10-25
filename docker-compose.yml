@@ -15,4 +15,17 @@ services:
       - 5432:5432
     networks:
       - default
-    
+
+  # front-end:
+  #   container_name: store_online_fe
+  #   image: front-end
+  #   restart: unless-stopped
+  #   # restart: always
+  #   env_file:
+  #     - ./frontend/.env.staging
+  #   build: ./frontend
+  #   working_dir: /app
+  #   ports:
+  #     - 9000:5173
+    # networks:
+      # - default
