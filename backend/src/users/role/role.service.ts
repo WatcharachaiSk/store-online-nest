@@ -18,8 +18,8 @@ export class RoleService {
   }
   async init() {
     try {
-      const findRoles = await this.roleUserRepository.find()
-      if (_.isEmpty(findRoles)) {
+      const findRoles = await this.roleUserRepository.count()
+      if (findRoles == 0) {
         this.logger.log("init role");
 
         const roleAdmin = new RoleUserEntity();
@@ -66,7 +66,7 @@ export class RoleService {
       }
 
     } catch (error) {
-
+      this.logger.log("init error ", error);
     }
   }
 
