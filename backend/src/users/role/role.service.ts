@@ -79,4 +79,13 @@ export class RoleService {
     }
   }
 
+  async findOne(id: number) {
+    try {
+      const role = await this.roleUserRepository.findOne({ where: { id: id } })
+      return role
+    } catch (error) {
+      throw error
+    }
+  }
+
 }
